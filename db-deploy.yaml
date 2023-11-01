@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: db1
+  name: db1
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db1
+  template:
+    metadata:
+      labels:
+        app: db1
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_USER
+          value: user1
+        - name: MYSQL_PASSWORD
+          value: mypa55w0rd
+        - name: MYSQL_DATABASE
+          value: items
+        image: registry.ocp4.example.com:8443/rhel8/mysql-80
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: mypod
+        imagePullPolicy: Always
+        name: mysql-80
+        ports:
+        - containerPort: 3306
+          protocol: TCP
+      volumes:
+        - name: mypod
+          persistentVolumeClaim:
+            claimName: pvc001  
