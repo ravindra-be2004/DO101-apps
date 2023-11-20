@@ -11,5 +11,5 @@ spec:
     path: /exports-ocp4/
     server: 192.168.50.254
   persistentVolumeReclaimPolicy: Delete
-  storageClassName: nfs-storage
+  #  storageClassName: nfs-storage
   volumeMode: Filesystem

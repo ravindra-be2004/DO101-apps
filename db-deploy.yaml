@@ -33,6 +33,6 @@ spec:
         - containerPort: 3306
           protocol: TCP
       volumes:
-        - name: mypod
-          persistentVolumeClaim:
-            claimName: pvc001  
+      - name: mypod
+        persistentVolumeClaim:
+          claimName: nfs-pvc  
