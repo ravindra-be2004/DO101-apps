@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web1
+  name: web1
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web1
+  template:
+    metadata:
+      labels:
+        app: web1
+    spec:
+      containers:
+        image: quay.io/ravindra_be2004/mydemo:v1
+        volumeMounts:
+        - mountPath: /var/www/html
+          name: mypod
+        imagePullPolicy: Always
+        name: web1
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+      volumes:
+      - name: mypod
+        persistentVolumeClaim:
+          claimName: nfs-pvc1 
